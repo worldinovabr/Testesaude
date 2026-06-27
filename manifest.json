@@ -1,7 +1,7 @@
 {
-  "name": "Autoavaliação Sensorial",
-  "short_name": "TesteSaúde",
-  "description": "Testes de visão, audição e cognição com armazenamento local para privacidade total.",
+  "name": "Autoavaliacao Sensorial",
+  "short_name": "TesteSaude",
+  "description": "Testes de visao, audicao e cognicao com armazenamento local.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
