@@ -1,3 +1,4 @@
+content = """\
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -412,7 +413,7 @@ function PrecisaoTest({ onDone }: { onDone: (r: TestResult) => void }) {
                 : 'bg-gradient-to-r from-purple-500 to-pink-500 shadow-lg shadow-purple-500/40 hover:scale-110 cursor-pointer text-white'
             }`}
             style={{ left: `${t.x}%`, top: `${t.y}%`, transform: 'translate(-50%, -50%)' }}>
-            {hit.has(t.id) ? '\u2713' : t.id + 1}
+            {hit.has(t.id) ? '\\u2713' : t.id + 1}
           </button>
         ))}
         {phase === 'done' && (
@@ -636,33 +637,31 @@ export function CognitionTest() {
 
   return (
     <Card className="w-full bg-gradient-to-br from-purple-900/20 to-pink-900/20 border-purple-500/30">
-      <div className="p-3 sm:p-6">
-        <div className="flex items-center gap-3 mb-3 sm:mb-6">
-          <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
-          <h2 className="text-lg sm:text-2xl font-bold text-white">
+      <div className="p-6">
+        <div className="flex items-center gap-3 mb-6">
+          <Brain className="w-6 h-6 text-purple-400" />
+          <h2 className="text-2xl font-bold text-white">
             {isCognition ? 'Teste de Cognição' : 'Teste de Coordenação'}
           </h2>
         </div>
 
-        <div className="mb-3 sm:mb-4 p-2.5 sm:p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg flex gap-2">
-          <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 flex-shrink-0 mt-0.5" />
-          <p className="text-xs sm:text-sm text-amber-100">
+        <div className="mb-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg flex gap-2">
+          <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+          <p className="text-sm text-amber-100">
             Indicativo apenas. Resultados podem variar conforme seu estado físico e mental.
           </p>
         </div>
 
         <Tabs value={category} onValueChange={changeCategory}>
-          <div className="overflow-x-auto -mx-3 sm:mx-0 px-3 sm:px-0">
-            <TabsList className="flex min-w-max bg-purple-900/30 border border-purple-500/30">
-              <TabsTrigger value="reacao"     className="text-xs whitespace-nowrap px-3">Reação</TabsTrigger>
-              <TabsTrigger value="memoria"    className="text-xs whitespace-nowrap px-3">Memória</TabsTrigger>
-              <TabsTrigger value="atencao"    className="text-xs whitespace-nowrap px-3">Atenção</TabsTrigger>
-              <TabsTrigger value="sequencia"  className="text-xs whitespace-nowrap px-3">Sequência</TabsTrigger>
-              <TabsTrigger value="precisao"   className="text-xs whitespace-nowrap px-3">Precisão</TabsTrigger>
-              <TabsTrigger value="trajetoria" className="text-xs whitespace-nowrap px-3">Trajetória</TabsTrigger>
-              <TabsTrigger value="velocidade" className="text-xs whitespace-nowrap px-3">Velocidade</TabsTrigger>
-            </TabsList>
-          </div>
+          <TabsList className="grid w-full grid-cols-7 bg-purple-900/30 border border-purple-500/30">
+            <TabsTrigger value="reacao"     className="text-xs">Reação</TabsTrigger>
+            <TabsTrigger value="memoria"    className="text-xs">Memória</TabsTrigger>
+            <TabsTrigger value="atencao"    className="text-xs">Atenção</TabsTrigger>
+            <TabsTrigger value="sequencia"  className="text-xs">Sequência</TabsTrigger>
+            <TabsTrigger value="precisao"   className="text-xs">Precisão</TabsTrigger>
+            <TabsTrigger value="trajetoria" className="text-xs">Trajetória</TabsTrigger>
+            <TabsTrigger value="velocidade" className="text-xs">Velocidade</TabsTrigger>
+          </TabsList>
 
           <TabsContent value={category} className="mt-6">
             {renderTest()}
@@ -670,14 +669,14 @@ export function CognitionTest() {
         </Tabs>
 
         {result && (
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4 sm:mt-6">
+          <div className="flex gap-3 mt-6">
             <div className="flex-1 p-3 bg-black/30 rounded-lg border border-white/5">
               <p className="text-gray-400 text-xs mb-1">Resultado</p>
               <p className="text-white font-bold">{result.label}</p>
               <p className="text-gray-500 text-xs">Pontuação: {result.score}/100</p>
             </div>
             <Button onClick={handleSave} disabled={saving}
-              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold sm:self-start">
+              className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold">
               {saving ? 'Salvando...' : 'Salvar'}
             </Button>
             <Button onClick={reset} variant="outline" className="border-purple-500/30 text-purple-300">
@@ -689,3 +688,11 @@ export function CognitionTest() {
     </Card>
   );
 }
+"""
+
+# Fix the unicode escape that was needed to avoid Python string issues
+content = content.replace("'\\\\u2713'", "'\\u2713'")
+
+with open('client/src/components/tests/CognitionTest.tsx', 'w', encoding='utf-8', newline='\n') as f:
+    f.write(content)
+print('Written', len(content.splitlines()), 'lines')

@@ -1,0 +1,75 @@
+"esa', 'livro'];\n\n// â”€â”€ Audio helpers â”€â”"
+'”€â”€ Audio helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€\n\nfunction playTone('
+'dom() - 0.5);\n}\n\n// â”€â”€ Component â”€â”€â”€'
+'// â”€â”€ Component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€\n\nexport function He'
+'(false);\n\n  // Frequência\n  const [freqSt'
+'tate(0);\n\n  // Equilíbrio\n  const [balanc'
+'seState(0);\n\n  // Ruído\n  const [noiseAtt'
+'tionMs);\n  };\n\n  // â”€â”€ Frequência â”€â”€\n\n'
+';\n\n  // â”€â”€ Frequência â”€â”€\n\n  const'
+'/ â”€â”€ Frequência â”€â”€\n\n  const freqScoreM'
+"Test(maxHz > 0 ? `Até ${maxHz} Hz` : 'Aba"
+');\n    }\n  };\n\n  // â”€â”€ Equilíbrio â”€â”€\n\n'
+';\n\n  // â”€â”€ Equilíbrio â”€â”€\n\n  const'
+'/ â”€â”€ Equilíbrio â”€â”€\n\n  const handleBala'
+"    let res = 'Equilíbrio auditivo normal"
+"ardR)  { res = 'Possível diferença no ouv"
+" = 'Possível diferença no ouvido direito'"
+"ardR)  { res = 'Possível diferença no ouv"
+" = 'Possível diferença no ouvido esquerdo"
+"eardR) { res = 'Audição muito baixa em amb"
+');\n    }\n  };\n\n  // â”€â”€ Palavras â”€â”€\n\n  '
+' // â”€â”€ Palavras â”€â”€\n\n  const makeWordOp'
+');\n    }\n  };\n\n  // â”€â”€ Ruído â”€â”€\n\n  con'
+'  };\n\n  // â”€â”€ Ruído â”€â”€\n\n  const h'
+'\n\n  // â”€â”€ Ruído â”€â”€\n\n  const handleNois'
+'t}/5 corretos com ruído`, pct);\n    } els'
+'5;\n    }\n  };\n\n  // â”€â”€ Salvar â”€â”€\n\n  co'
+'\n  // â”€â”€ Salvar â”€â”€\n\n  const handleSave'
+');\n    }\n  };\n\n  // â”€â”€ Renderers â”€â”€\n\n '
+'// â”€â”€ Renderers â”€â”€\n\n  const renderFreq'
+'\n        <span>Frequência: <strong classN'
+'do para maior precisão.</p>\n        <Butt'
+"        {playing ? 'â–¶ Reproduzindoâ€¦' : "
+" ? 'â–¶ Reproduzindoâ€¦' : 'â–¶ Reproduzir "
+"Reproduzindoâ€¦' : 'â–¶ Reproduzir Tom'}\n  "
+'t-white">\n          âœ“ Consigo ouvir\n     '
+'-500/20">\n          âœ— Não consigo ouvir\n '
+'20">\n          âœ— Não consigo ouvir\n    '
+'         O som tocará <strong>apenas no o'
+"        {playing ? 'â–¶ Reproduzindoâ€¦' : "
+" ? 'â–¶ Reproduzindoâ€¦' : 'â–¶ Reproduzir "
+"Reproduzindoâ€¦' : 'â–¶ Reproduzir Som'}\n  "
+'white">\n            âœ“ Ouvi claramente\n   '
+'00/20">\n            âœ— Não ouvi bem\n      '
+'">\n            âœ— Não ouvi bem\n         '
+'ne a palavra que você ouviu.\n        </p>'
+"        {playing ? 'â–¶ Reproduzindoâ€¦' : "
+" ? 'â–¶ Reproduzindoâ€¦' : 'â–¶ Reproduzir "
+"Reproduzindoâ€¦' : 'â–¶ Reproduzir Palavra'"
+'ellow-400 text-sm">Síntese de voz não dis'
+'sm">Síntese de voz não disponível neste n'
+'se de voz não disponível neste navegador.'
+'xt-sm">\n          Ouça o som. Há um <stro'
+'       Ouça o som. Há um <strong>tom puro'
+'ong> misturado ao ruído de fundo?\n       '
+"        {playing ? 'â–¶ Reproduzindoâ€¦' : "
+" ? 'â–¶ Reproduzindoâ€¦' : 'â–¶ Reproduzir'"
+"Reproduzindoâ€¦' : 'â–¶ Reproduzir'}\n      "
+'t-white">\n          âœ“ Ouvi um tom\n       '
+'-500/20">\n          âœ— Só ruído\n        </'
+'20">\n          âœ— Só ruído\n        </But'
+'\n          âœ— Só ruído\n        </Button>'
+'xl">{score >= 70 ? \'âœ…\' : score >= 40 ? \'â'
+"…' : score >= 40 ? 'âš\xa0ï¸\x8f' : 'â\x9dŒ'}</div>\n   "
+">= 40 ? 'âš\xa0ï¸\x8f' : 'â\x9dŒ'}</div>\n      <p cl"
+'        <span>Pontuação</span><span>{score'
+" haver alguma alteração â€” acompanhe.'\n  "
+"er alguma alteração â€” acompanhe.'\n       "
+'onsultar um fonoaudiólogo ou otorrinolari'
+'iar Teste" para começar</p>\n      <p clas'
+'white">Teste de Audição</h2>\n        </div'
+' qualidade. A precisão depende do equipam'
+'Name="text-xs">Frequência</TabsTrigger>\n '
+'Name="text-xs">Equilíbrio</TabsTrigger>\n '
+'assName="text-xs">Ruído</TabsTrigger>\n   '

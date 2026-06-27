@@ -48,6 +48,7 @@ export function useTestHistory() {
     allTests,
     loading,
     error,
+    refresh: loadAllTests,
     loadAllTests,
     getTestsByType,
     getLatestTest,

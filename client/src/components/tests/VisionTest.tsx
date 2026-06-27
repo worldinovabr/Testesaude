@@ -256,7 +256,7 @@ export function VisionTest() {
   );
 
   const renderResult = () => (
-    <div className="bg-black/40 rounded-lg p-8 text-center flex flex-col items-center gap-4 min-h-48">
+    <div className="bg-black/40 rounded-lg p-4 sm:p-8 text-center flex flex-col items-center gap-4 min-h-40 sm:min-h-48">
       <div className="text-5xl">{score >= 70 ? '✅' : score >= 40 ? '⚠️' : '❌'}</div>
       <p className="text-2xl font-bold text-cyan-400">{result}</p>
       <div className="w-full max-w-xs">
@@ -274,7 +274,7 @@ export function VisionTest() {
   );
 
   const renderIdle = () => (
-    <div className="bg-black/40 rounded-lg p-10 text-center flex flex-col items-center gap-3 min-h-48">
+    <div className="bg-black/40 rounded-lg p-4 sm:p-10 text-center flex flex-col items-center gap-3 min-h-40 sm:min-h-48">
       <Eye className="w-14 h-14 text-purple-400 opacity-40" />
       <p className="text-gray-400">Clique em "Iniciar Teste" para começar</p>
       <p className="text-gray-500 text-sm">Siga as instruções que aparecerem na tela</p>
@@ -295,37 +295,39 @@ export function VisionTest() {
 
   return (
     <Card className="w-full bg-gradient-to-br from-purple-900/20 to-cyan-900/20 border-purple-500/30">
-      <div className="p-6">
-        <div className="flex items-center gap-3 mb-6">
-          <Eye className="w-6 h-6 text-purple-400" />
-          <h2 className="text-2xl font-bold text-white">Teste de Visão</h2>
+      <div className="p-3 sm:p-6">
+        <div className="flex items-center gap-3 mb-3 sm:mb-6">
+          <Eye className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
+          <h2 className="text-lg sm:text-2xl font-bold text-white">Teste de Visão</h2>
         </div>
 
-        <div className="mb-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg flex gap-2">
-          <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
-          <p className="text-sm text-amber-100">
+        <div className="mb-3 sm:mb-4 p-2.5 sm:p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg flex gap-2">
+          <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+          <p className="text-xs sm:text-sm text-amber-100">
             Indicativo apenas. Para avaliação profissional, consulte um oftalmologista.
           </p>
         </div>
 
         <Tabs value={category} onValueChange={(val) => { setCategory(val as VisionTestCategory); resetTest(); }}>
-          <TabsList className="grid w-full grid-cols-5 bg-purple-900/30 border border-purple-500/30">
-            <TabsTrigger value="acuidade"    className="text-xs">Acuidade</TabsTrigger>
-            <TabsTrigger value="daltonismo"  className="text-xs">Daltonismo</TabsTrigger>
-            <TabsTrigger value="astigmatismo" className="text-xs">Astigmatismo</TabsTrigger>
-            <TabsTrigger value="contraste"   className="text-xs">Contraste</TabsTrigger>
-            <TabsTrigger value="proximidade" className="text-xs">Proximidade</TabsTrigger>
-          </TabsList>
+          <div className="overflow-x-auto -mx-3 sm:mx-0 px-3 sm:px-0">
+            <TabsList className="flex min-w-max w-full bg-purple-900/30 border border-purple-500/30">
+              <TabsTrigger value="acuidade"     className="text-xs flex-1 whitespace-nowrap px-2.5">Acuidade</TabsTrigger>
+              <TabsTrigger value="daltonismo"   className="text-xs flex-1 whitespace-nowrap px-2.5">Daltonismo</TabsTrigger>
+              <TabsTrigger value="astigmatismo" className="text-xs flex-1 whitespace-nowrap px-2.5">Astigmatismo</TabsTrigger>
+              <TabsTrigger value="contraste"    className="text-xs flex-1 whitespace-nowrap px-2.5">Contraste</TabsTrigger>
+              <TabsTrigger value="proximidade"  className="text-xs flex-1 whitespace-nowrap px-2.5">Proximidade</TabsTrigger>
+            </TabsList>
+          </div>
 
           {(['acuidade', 'daltonismo', 'astigmatismo', 'contraste', 'proximidade'] as VisionTestCategory[]).map((cat) => (
             <TabsContent key={cat} value={cat} className="mt-6">{renderContent()}</TabsContent>
           ))}
         </Tabs>
 
-        <div className="flex gap-3 mt-6">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4 sm:mt-6">
           {phase === 'idle' && (
             <Button onClick={() => setPhase('running')}
-              className="flex-1 bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white font-semibold">
+              className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white font-semibold">
               Iniciar Teste
             </Button>
           )}

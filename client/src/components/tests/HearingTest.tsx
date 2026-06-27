@@ -108,10 +108,10 @@ export function HearingTest() {
   const [saving, setSaving] = useState(false);
   const [playing, setPlaying] = useState(false);
 
-  // FrequÃªncia
+  // Frequência
   const [freqStep, setFreqStep] = useState(0);
 
-  // EquilÃ­brio
+  // Equilíbrio
   const [balanceStep, setBalanceStep] = useState(0); // 0=left, 1=right
   const [balanceResults, setBalanceResults] = useState<boolean[]>([]);
 
@@ -120,7 +120,7 @@ export function HearingTest() {
   const [wordOptions, setWordOptions] = useState<string[]>([]);
   const [wordCorrect, setWordCorrect] = useState(0);
 
-  // RuÃ­do
+  // Ruído
   const [noiseAttempt, setNoiseAttempt] = useState(0);
   const [noiseCorrect, setNoiseCorrect] = useState(0);
   const noiseHasToneRef = useRef(false);
@@ -158,7 +158,7 @@ export function HearingTest() {
     setTimeout(() => { setPlaying(false); stopAudio.current = () => {}; }, durationMs);
   };
 
-  // â”€â”€ FrequÃªncia â”€â”€
+  // â”€â”€ Frequência â”€â”€
 
   const freqScoreMap: Record<number, number> = {
     16000: 100, 14000: 90, 12000: 80, 10000: 70,
@@ -166,7 +166,7 @@ export function HearingTest() {
   };
 
   const finishFreqTest = (maxHz: number) => {
-    finishTest(maxHz > 0 ? `AtÃ© ${maxHz} Hz` : 'Abaixo de 1000 Hz', freqScoreMap[maxHz] ?? 0);
+    finishTest(maxHz > 0 ? `Até ${maxHz} Hz` : 'Abaixo de 1000 Hz', freqScoreMap[maxHz] ?? 0);
   };
 
   const handleFreqPlay = () =>
@@ -184,7 +184,7 @@ export function HearingTest() {
     }
   };
 
-  // â”€â”€ EquilÃ­brio â”€â”€
+  // â”€â”€ Equilíbrio â”€â”€
 
   const handleBalancePlay = () => {
     const pan = balanceStep === 0 ? -1 : 1;
@@ -196,11 +196,11 @@ export function HearingTest() {
     setBalanceResults(newResults);
     if (balanceStep + 1 >= 2) {
       const [heardL, heardR] = [newResults[0], newResults[1]];
-      let res = 'EquilÃ­brio auditivo normal';
+      let res = 'Equilíbrio auditivo normal';
       let sc = 90;
-      if (heardL && !heardR)  { res = 'PossÃ­vel diferenÃ§a no ouvido direito';   sc = 50; }
-      if (!heardL && heardR)  { res = 'PossÃ­vel diferenÃ§a no ouvido esquerdo';  sc = 50; }
-      if (!heardL && !heardR) { res = 'AudiÃ§Ã£o muito baixa em ambos os lados';  sc = 20; }
+      if (heardL && !heardR)  { res = 'Possível diferença no ouvido direito';   sc = 50; }
+      if (!heardL && heardR)  { res = 'Possível diferença no ouvido esquerdo';  sc = 50; }
+      if (!heardL && !heardR) { res = 'Audição muito baixa em ambos os lados';  sc = 20; }
       finishTest(res, sc);
     } else {
       setBalanceStep(1);
@@ -239,7 +239,7 @@ export function HearingTest() {
     }
   };
 
-  // â”€â”€ RuÃ­do â”€â”€
+  // â”€â”€ Ruído â”€â”€
 
   const handleNoisePlay = () => {
     const hasTone = Math.random() > 0.35;
@@ -256,7 +256,7 @@ export function HearingTest() {
 
     if (newAttempt >= 5) {
       const pct = Math.round((newCorrect / newAttempt) * 100);
-      finishTest(`${newCorrect}/5 corretos com ruÃ­do`, pct);
+      finishTest(`${newCorrect}/5 corretos com ruído`, pct);
     } else {
       // pre-decide next round
       noiseHasToneRef.current = Math.random() > 0.35;
@@ -286,30 +286,30 @@ export function HearingTest() {
   const renderFrequencia = () => (
     <div className="space-y-4">
       <div className="flex justify-between text-sm text-gray-400">
-        <span>FrequÃªncia: <strong className="text-cyan-400">{FREQUENCIES[freqStep]} Hz</strong></span>
+        <span>Frequência: <strong className="text-cyan-400">{FREQUENCIES[freqStep]} Hz</strong></span>
         <span>Passo {freqStep + 1}/{FREQUENCIES.length}</span>
       </div>
       <Progress value={(freqStep / FREQUENCIES.length) * 100} className="h-2" />
-      <div className="bg-black/40 rounded-lg p-6 text-center space-y-4">
-        <Headphones className="w-14 h-14 text-cyan-400 mx-auto opacity-80" />
+      <div className="bg-black/40 rounded-lg p-4 sm:p-6 text-center space-y-3">
+        <Headphones className="w-10 h-10 sm:w-14 sm:h-14 text-cyan-400 mx-auto opacity-80" />
         <p className="text-gray-300 text-sm">
           Clique em <strong>Reproduzir</strong> e indique se consegue ouvir o tom em{' '}
           <strong>{FREQUENCIES[freqStep]} Hz</strong>.
         </p>
-        <p className="text-gray-500 text-xs">Use fones de ouvido para maior precisÃ£o.</p>
+        <p className="text-gray-500 text-xs">Use fones de ouvido para maior precisão.</p>
         <Button onClick={handleFreqPlay} disabled={playing}
           className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white">
-          {playing ? 'â–¶ Reproduzindoâ€¦' : 'â–¶ Reproduzir Tom'}
+          {playing ? '▶ Reproduzindo…' : '▶ Reproduzir Tom'}
         </Button>
       </div>
       <div className="grid grid-cols-2 gap-3">
         <Button onClick={() => handleFreqHeard(true)} disabled={playing}
           className="bg-green-600/80 hover:bg-green-700 text-white">
-          âœ“ Consigo ouvir
+          ✓ Consigo ouvir
         </Button>
         <Button onClick={() => handleFreqHeard(false)} disabled={playing} variant="outline"
           className="border-red-500/30 text-red-300 hover:bg-red-500/20">
-          âœ— NÃ£o consigo ouvir
+          ✗ Não consigo ouvir
         </Button>
       </div>
     </div>
@@ -327,22 +327,22 @@ export function HearingTest() {
         <div className="bg-black/40 rounded-lg p-6 text-center space-y-4">
           <Headphones className="w-14 h-14 text-cyan-400 mx-auto opacity-80" />
           <p className="text-gray-300 text-sm">
-            O som tocarÃ¡ <strong>apenas no ouvido {side.toLowerCase()}</strong>.
+            O som tocará <strong>apenas no ouvido {side.toLowerCase()}</strong>.
             Consegue ouvi-lo claramente?
           </p>
           <Button onClick={handleBalancePlay} disabled={playing}
             className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white">
-            {playing ? 'â–¶ Reproduzindoâ€¦' : 'â–¶ Reproduzir Som'}
+            {playing ? '▶ Reproduzindo…' : '▶ Reproduzir Som'}
           </Button>
         </div>
         <div className="grid grid-cols-2 gap-3">
           <Button onClick={() => handleBalanceResponse(true)} disabled={playing}
             className="bg-green-600/80 hover:bg-green-700 text-white">
-            âœ“ Ouvi claramente
+            ✓ Ouvi claramente
           </Button>
           <Button onClick={() => handleBalanceResponse(false)} disabled={playing} variant="outline"
             className="border-red-500/30 text-red-300 hover:bg-red-500/20">
-            âœ— NÃ£o ouvi bem
+            ✗ Não ouvi bem
           </Button>
         </div>
       </div>
@@ -358,15 +358,15 @@ export function HearingTest() {
       <Progress value={(wordIndex / TEST_WORDS.length) * 100} className="h-2" />
       <div className="bg-black/40 rounded-lg p-6 text-center space-y-3">
         <p className="text-gray-300 text-sm">
-          Clique em <strong>Reproduzir</strong> e selecione a palavra que vocÃª ouviu.
+          Clique em <strong>Reproduzir</strong> e selecione a palavra que você ouviu.
         </p>
         {'speechSynthesis' in window ? (
           <Button onClick={handleWordPlay} disabled={playing}
             className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white">
-            {playing ? 'â–¶ Reproduzindoâ€¦' : 'â–¶ Reproduzir Palavra'}
+            {playing ? '▶ Reproduzindo…' : '▶ Reproduzir Palavra'}
           </Button>
         ) : (
-          <p className="text-yellow-400 text-sm">SÃ­ntese de voz nÃ£o disponÃ­vel neste navegador.</p>
+          <p className="text-yellow-400 text-sm">Síntese de voz não disponível neste navegador.</p>
         )}
       </div>
       <div className="grid grid-cols-2 gap-3">
@@ -389,21 +389,21 @@ export function HearingTest() {
       <Progress value={(noiseAttempt / 5) * 100} className="h-2" />
       <div className="bg-black/40 rounded-lg p-6 text-center space-y-3">
         <p className="text-gray-300 text-sm">
-          OuÃ§a o som. HÃ¡ um <strong>tom puro</strong> misturado ao ruÃ­do de fundo?
+          Ouça o som. Há um <strong>tom puro</strong> misturado ao ruído de fundo?
         </p>
         <Button onClick={handleNoisePlay} disabled={playing}
           className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white">
-          {playing ? 'â–¶ Reproduzindoâ€¦' : 'â–¶ Reproduzir'}
+          {playing ? '▶ Reproduzindo…' : '▶ Reproduzir'}
         </Button>
       </div>
       <div className="grid grid-cols-2 gap-3">
         <Button onClick={() => handleNoiseResponse(true)} disabled={playing}
           className="bg-green-600/80 hover:bg-green-700 text-white">
-          âœ“ Ouvi um tom
+          ✓ Ouvi um tom
         </Button>
         <Button onClick={() => handleNoiseResponse(false)} disabled={playing} variant="outline"
           className="border-red-500/30 text-red-300 hover:bg-red-500/20">
-          âœ— SÃ³ ruÃ­do
+          ✗ Só ruído
         </Button>
       </div>
     </div>
@@ -411,18 +411,18 @@ export function HearingTest() {
 
   const renderResult = () => (
     <div className="bg-black/40 rounded-lg p-8 text-center flex flex-col items-center gap-4 min-h-48">
-      <div className="text-5xl">{score >= 70 ? 'âœ…' : score >= 40 ? 'âš ï¸' : 'âŒ'}</div>
+      <div className="text-5xl">{score >= 70 ? '✅' : score >= 40 ? '⚠️' : '❌'}</div>
       <p className="text-2xl font-bold text-cyan-400">{result}</p>
       <div className="w-full max-w-xs">
         <div className="flex justify-between text-sm text-gray-400 mb-1">
-          <span>PontuaÃ§Ã£o</span><span>{score}/100</span>
+          <span>Pontuação</span><span>{score}/100</span>
         </div>
         <Progress value={score} className="h-3" />
       </div>
       <p className="text-gray-400 text-sm">
         {score >= 70 ? 'Resultado dentro da normalidade.'
-          : score >= 40 ? 'Pode haver alguma alteraÃ§Ã£o â€” acompanhe.'
-          : 'Considere consultar um fonoaudiÃ³logo ou otorrinolaringologista.'}
+          : score >= 40 ? 'Pode haver alguma alteração — acompanhe.'
+          : 'Considere consultar um fonoaudiólogo ou otorrinolaringologista.'}
       </p>
     </div>
   );
@@ -430,7 +430,7 @@ export function HearingTest() {
   const renderIdle = () => (
     <div className="bg-black/40 rounded-lg p-10 text-center flex flex-col items-center gap-3 min-h-48">
       <Volume2 className="w-14 h-14 text-cyan-400 opacity-40" />
-      <p className="text-gray-400">Clique em "Iniciar Teste" para comeÃ§ar</p>
+      <p className="text-gray-400">Clique em "Iniciar Teste" para começar</p>
       <p className="text-gray-500 text-sm">Use fones de ouvido para melhores resultados</p>
     </div>
   );
@@ -457,25 +457,25 @@ export function HearingTest() {
 
   return (
     <Card className="w-full bg-gradient-to-br from-cyan-900/20 to-purple-900/20 border-cyan-500/30">
-      <div className="p-6">
-        <div className="flex items-center gap-3 mb-6">
-          <Volume2 className="w-6 h-6 text-cyan-400" />
-          <h2 className="text-2xl font-bold text-white">Teste de AudiÃ§Ã£o</h2>
+      <div className="p-3 sm:p-6">
+        <div className="flex items-center gap-3 mb-3 sm:mb-6">
+          <Volume2 className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
+          <h2 className="text-lg sm:text-2xl font-bold text-white">Teste de Audição</h2>
         </div>
 
-        <div className="mb-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg flex gap-2">
-          <AlertCircle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
-          <p className="text-sm text-amber-100">
-            Use fones de ouvido de qualidade. A precisÃ£o depende do equipamento e do ambiente.
+        <div className="mb-3 sm:mb-4 p-2.5 sm:p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg flex gap-2">
+          <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+          <p className="text-xs sm:text-sm text-amber-100">
+            Use fones de ouvido de qualidade. A precisão depende do equipamento e do ambiente.
           </p>
         </div>
 
         <Tabs value={category} onValueChange={(val) => { setCategory(val as HearingTestCategory); resetTest(); }}>
           <TabsList className="grid w-full grid-cols-4 bg-cyan-900/30 border border-cyan-500/30">
-            <TabsTrigger value="frequencia" className="text-xs">FrequÃªncia</TabsTrigger>
-            <TabsTrigger value="equilibrio" className="text-xs">EquilÃ­brio</TabsTrigger>
-            <TabsTrigger value="palavras"   className="text-xs">Palavras</TabsTrigger>
-            <TabsTrigger value="ruido"      className="text-xs">RuÃ­do</TabsTrigger>
+            <TabsTrigger value="frequencia" className="text-xs px-1.5">Frequência</TabsTrigger>
+            <TabsTrigger value="equilibrio" className="text-xs px-1.5">Equilíbrio</TabsTrigger>
+            <TabsTrigger value="palavras"   className="text-xs px-1.5">Palavras</TabsTrigger>
+            <TabsTrigger value="ruido"      className="text-xs px-1.5">Ruído</TabsTrigger>
           </TabsList>
 
           {(['frequencia', 'equilibrio', 'palavras', 'ruido'] as HearingTestCategory[]).map((cat) => (
@@ -483,10 +483,10 @@ export function HearingTest() {
           ))}
         </Tabs>
 
-        <div className="flex gap-3 mt-6">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4 sm:mt-6">
           {phase === 'idle' && (
             <Button onClick={handleStart}
-              className="flex-1 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-semibold">
+              className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-semibold">
               Iniciar Teste
             </Button>
           )}
