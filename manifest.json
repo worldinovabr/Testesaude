@@ -1,14 +1,41 @@
 {
-  "name": "Autoavaliacao Sensorial",
-  "short_name": "Sensory Check",
-  "description": "Aplicativo de autoavaliacao sensorial com testes de visao, audicao, cognicao e coordenacao motora. Armazenamento local para privacidade total.",
-  "start_url": "/",
-  "scope": "/",
+  "name": "Autoavaliação Sensorial",
+  "short_name": "TesteSaúde",
+  "description": "Testes de visão, audição e cognição com armazenamento local para privacidade total.",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#0f172a",
   "theme_color": "#7C3AED",
   "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["health", "productivity"]
+}
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
