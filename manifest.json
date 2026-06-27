@@ -1,0 +1,90 @@
+{
+  "name": "Autoavaliacao Sensorial",
+  "short_name": "Sensory Check",
+  "description": "Aplicativo de autoavaliacao sensorial com testes de visao, audicao, cognicao e coordenacao motora. Armazenamento local para privacidade total.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#7C3AED",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["health", "productivity"],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot-2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Teste de Visao",
+      "short_name": "Visao",
+      "description": "Inicie um teste de visao",
+      "url": "/?tab=testes",
+      "icons": [
+        {
+          "src": "/icon-eye-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Teste de Audicao",
+      "short_name": "Audicao",
+      "description": "Inicie um teste de audicao",
+      "url": "/?tab=testes",
+      "icons": [
+        {
+          "src": "/icon-ear-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Historico",
+      "short_name": "Historico",
+      "description": "Veja seu historico de testes",
+      "url": "/?tab=historico",
+      "icons": [
+        {
+          "src": "/icon-history-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
